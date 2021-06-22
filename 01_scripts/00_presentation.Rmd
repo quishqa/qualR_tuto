@@ -20,6 +20,11 @@ knitr::opts_chunk$set(echo = FALSE)
    - _**Science Reproducibility**_
    - Análise **mais rápido** do comportamento dos poluentes.
 
+## Meus objetivos
+- Apresentar qualR para o LAPAt
+- Detectar alguns erros
+- Ter suggestões
+
 ## O Cardápio
 - **`CetesbRetrieve()`**
    - Baixar um poluente de uma estação
@@ -31,7 +36,7 @@ knitr::opts_chunk$set(echo = FALSE)
    - Baixar dados de muitas estações
    - Selecionar lat e lon das estações selecionadas
 
-## Mas primeiro a instalação
+## Primeiro a instalação
 
 ```{r, echo=TRUE, eval=F}
 install.packages("devtools") # Se não está instalado 
