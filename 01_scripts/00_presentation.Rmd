@@ -1,0 +1,47 @@
+---
+title: "qualR"
+subtitle: "Uma pequena introdução"
+author: "Mario Gavidia-Calderón"
+date: "6/22/2021"
+output:
+  beamer_presentation:
+    theme: "Dresden"
+    fonttheme: "structurebold"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## `qualR`
+
+- Um pacote para baixar os dados de qualidade do ar da CETESB e MonitorAr
+- Mais dois objetivos
+   - _**Science Reproducibility**_
+   - Análise **mais rápido** do comportamento dos poluentes.
+
+## O Cardápio
+- **`CetesbRetrieve()`**
+   - Baixar um poluente de uma estação
+   - Baixar dados mais **"humanamente"**
+- **`CetesbRetrieveParam()`** >  **`CetesbRetrieve()`**
+- **`qualR`** e **`openair`** são melhore amigos
+- Boas práticas:
+   - Salvando usuario e senhas
+   - Baixar dados de muitas estações
+   - Selecionar lat e lon das estações selecionadas
+
+## Mas primeiro a instalação
+
+```{r, echo=TRUE, eval=F}
+install.packages("devtools") # Se não está instalado 
+devtools::install_github("quishqa/qualR")
+```
+
+## Maior informaçaõ no README
+
+[https://github.com/quishqa/qualR](https://github.com/quishqa/qualR)
+
+## Qualque dúvidas o erros no qualR usar `issues`
+
+[https://github.com/quishqa/qualR/issues](https://github.com/quishqa/qualR/issues)
