@@ -1,0 +1,38 @@
+---
+title: "Minha primeira aula do `openair`"
+author:
+- Mario Gavidia-Calderón \newline
+- Rafaella Squizzato \newline
+- Alejandro Delgado
+date: "7/12/2021"
+output:
+  beamer_presentation:
+    theme: "Dresden"
+    fonttheme: "structurebold"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## O cardápio
+1. Do Excel para o R
+2. Não esqueça da data: `as.POSIXct()`
+3. Figuras legais:
+    * `summaryPlot()`
+    * `timePlot()`
+    * `windRose()`
+    * `PollutionRose()`
+    * `timevariation()`
+4. Funções para alegrar a vida:
+    * `timeAverage`
+    * `selectByDate`
+    * `splitByDate`
+
+
+
+## Maior informação
+- [`openair` github repository](https://github.com/davidcarslaw/openair)
+- [`openair` on-line book](https://bookdown.org/david_carslaw/openair/)
+- [`openair` paper](https://doi.org/10.1016/j.envsoft.2011.09.008)
+- [CBPF paper](https://doi.org/10.1016/j.envsoft.2014.05.002)
