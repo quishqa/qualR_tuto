@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## O cardápio
 1. Do Excel para o R
-2. Não esqueça da data: `as.POSIXct()`
+2. **Lembre da data: `as.POSIXct()`**
 3. Figuras legais:
     * `summaryPlot()`
     * `timePlot()`
@@ -29,6 +29,41 @@ knitr::opts_chunk$set(echo = FALSE)
     * `selectByDate`
     * `splitByDate`
 
+## Do Excel para o R
+- Existe o pacote **`readxl`** para ler os `.xls` dentro do R.
+- Eu não recomendo >:(
+- **Melhor salvar o arquivo como `.csv` e ler o `.csv` no R. :) **
+- Serve para Excel, Google Sheet, Libre Office, etc
+
+## Do Excel para o R
+- Exemplo com dados de Southport - Australia.
+- Dados de [**openaq.org**](www.openaq.org)
+- Procesados para nosso curso.
+  - Maior informação em `02_preparing_example.R`
+
+## Do Excel para o R
+
+```{r , echo=TRUE}
+au <- read.csv("../03_output/au_df_example.csv",
+               sep = ",", dec = ".", header = T)
+head(au, 5)
+```
+
+## Lembre da data: `as.POSIXct()`
+```{r, echo=TRUE}
+str(au)
+```
+
+## Lembre da data: `as.POSIXct()`
+- Temos que dizer para o R que a coluna `date` não é `chr` senão dado de data
+- Dica: `openair` sempre vai procurar a coluna `date`
+```{r, echo=TRUE}
+au$date <- as.POSIXct(
+  strptime(au$date, 
+           format = "%Y-%m-%dT%H:%M:%S+10:00"),
+  tz = "Etc/GMT+10"
+  )
+```
 
 
 ## Maior informação
