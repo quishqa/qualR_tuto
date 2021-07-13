@@ -279,3 +279,9 @@ timeVariation(ibi_cov, pol = "o3", group = "situation")
 - [`openair` on-line book](https://bookdown.org/david_carslaw/openair/)
 - [`openair` paper](https://doi.org/10.1016/j.envsoft.2011.09.008)
 - [CBPF paper](https://doi.org/10.1016/j.envsoft.2014.05.002)
+
+## SOS 
+
+- mario.calderon@iag.usp.br 
+- rafaela.squizzato@iag.usp.br 
+- adelgado@iag.usp.br
