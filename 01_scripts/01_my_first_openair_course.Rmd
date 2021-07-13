@@ -211,15 +211,41 @@ saveRDS(pin, file="../02_data/pin_pol_with_wind.Rds")
 ## `windRose()`
 ```{r, echo=T, fig.height=3, fig.width=3, warning=F}
 pin <- readRDS("../02_data/pin_pol_with_wind.Rds")
-windRose(pin, ws="ws", wd="wd")
+wr <- windRose(pin, ws="ws", wd="wd")
 ```
 
 ## `windRose()`
 ```{r, echo=T, fig.height=4, fig.width=10, warning=F}
 windRose(pin, ws="ws", wd="wd", type = "month",
-         layout = c(6, 2))
+               layout = c(6, 2))
 
 ```
+
+## `polarPlot()`
+```{r, echo=T,  fig.height=3, fig.width=3, warning=F }
+pp <- polarPlot(pin, pollutant = "mp2.5")
+
+```
+
+## `percentileRose()`
+```{r, echo=T, fig.height=2.5, fig.width=2.5, warning=F}
+pr <- percentileRose(pin, pollutant = "mp2.5", percentile=75,
+                     method = "cpf", col = "blue", smooth = T)
+```
+
+## `polarAnnulus()
+```{r, echo=T, fig.height=2.5, fig.width=2.5, warning=F}
+pa <- polarAnnulus(pin, pollutant = "mp2.5", period="hour",
+                   exclude.missing=F)
+```
+
+## multiplots
+```{r, echo=T, fig.height=2.5, fig.height=7, warning=F}
+library(gridExtra)
+grid.arrange(wr$plot, pa$plot, pp$plot, pr$plot, 
+             nrow= 1, ncol = 4)
+```
+
 
 
 ## Exemplos mais legais
