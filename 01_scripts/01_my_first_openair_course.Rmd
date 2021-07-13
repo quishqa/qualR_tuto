@@ -134,6 +134,61 @@ timePlot(ibi, pol = c("pm10", "pm25"), avg.time = "day")
 timeVariation(ibi, pol = "o3")
 ```
 
+
+## `WindRose`
+```{r, echo=T, eval=FALSE}
+library(qualR)
+
+params <- c("MP10", "MP2.5", "NOx", "VV", "DV")
+pin <- CetesbRetrieveParam(Sys.getenv("QUALAR_USER"),
+                           Sys.getenv("QUALAR_PASS"),
+                           params,
+                           "Pinheiros",
+                           "01/01/2020",
+                           "31/12/2020")
+
+saveRDS(pin, file="../02_data/pin_pol_with_wind.Rds")
+```
+
+## `windRose()`
+```{r, echo=T, fig.height=3, fig.width=3, warning=F}
+pin <- readRDS("../02_data/pin_pol_with_wind.Rds")
+wr <- windRose(pin, ws="ws", wd="wd")
+```
+
+## `windRose()`
+```{r, echo=T, fig.height=4, fig.width=10, warning=F}
+windRose(pin, ws="ws", wd="wd", type = "month",
+               layout = c(6, 2))
+
+```
+
+## `polarPlot()`
+```{r, echo=T,  fig.height=3, fig.width=3, warning=F }
+pp <- polarPlot(pin, pollutant = "mp2.5")
+
+```
+
+## `percentileRose()`
+```{r, echo=T, fig.height=2.5, fig.width=2.5, warning=F}
+pr <- percentileRose(pin, pollutant = "mp2.5", percentile=75,
+                     method = "cpf", col = "blue", smooth = T)
+```
+
+## `polarAnnulus()
+```{r, echo=T, fig.height=2.5, fig.width=2.5, warning=F}
+pa <- polarAnnulus(pin, pollutant = "mp2.5", period="hour",
+                   exclude.missing=F)
+```
+
+## multiplots
+```{r, echo=T, fig.height=2.5, fig.height=7, warning=F}
+library(gridExtra)
+grid.arrange(wr$plot, pa$plot, pp$plot, pr$plot, 
+             nrow= 1, ncol = 4)
+```
+
+
 ## `SelectByDate`
 ```{r, echo=T, fig.height=3, fig.width=5}
 covid <- selectByDate(ibi,
@@ -191,60 +246,17 @@ legend("topleft", legend=c("Weekday", "Weekend"), col=c("blue", "red"),
        lty= c(1,1), bty="n")
 ```
 
-
-
-## `WindRose`
-```{r, echo=T, eval=FALSE}
-library(qualR)
-
-params <- c("MP10", "MP2.5", "NOx", "VV", "DV")
-pin <- CetesbRetrieveParam(Sys.getenv("QUALAR_USER"),
-                           Sys.getenv("QUALAR_PASS"),
-                           params,
-                           "Pinheiros",
-                           "01/01/2020",
-                           "31/12/2020")
-
-saveRDS(pin, file="../02_data/pin_pol_with_wind.Rds")
+## `timeAverage`
+```{r, echo=T, fig.height=4, fig.width=5}
+# Média diaria
+ibi19_day <- timeAverage(ibi19, avg.time = "day")
+# Média mensal
+ibi19_month <- timeAverage(ibi19, avg.time = "month")
+# Média sasonal
+ibi19_season <- timeAverage(ibi19, avg.time = "season")
 ```
 
-## `windRose()`
-```{r, echo=T, fig.height=3, fig.width=3, warning=F}
-pin <- readRDS("../02_data/pin_pol_with_wind.Rds")
-wr <- windRose(pin, ws="ws", wd="wd")
-```
 
-## `windRose()`
-```{r, echo=T, fig.height=4, fig.width=10, warning=F}
-windRose(pin, ws="ws", wd="wd", type = "month",
-               layout = c(6, 2))
-
-```
-
-## `polarPlot()`
-```{r, echo=T,  fig.height=3, fig.width=3, warning=F }
-pp <- polarPlot(pin, pollutant = "mp2.5")
-
-```
-
-## `percentileRose()`
-```{r, echo=T, fig.height=2.5, fig.width=2.5, warning=F}
-pr <- percentileRose(pin, pollutant = "mp2.5", percentile=75,
-                     method = "cpf", col = "blue", smooth = T)
-```
-
-## `polarAnnulus()
-```{r, echo=T, fig.height=2.5, fig.width=2.5, warning=F}
-pa <- polarAnnulus(pin, pollutant = "mp2.5", period="hour",
-                   exclude.missing=F)
-```
-
-## multiplots
-```{r, echo=T, fig.height=2.5, fig.height=7, warning=F}
-library(gridExtra)
-grid.arrange(wr$plot, pa$plot, pp$plot, pr$plot, 
-             nrow= 1, ncol = 4)
-```
 
 
 
