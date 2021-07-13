@@ -19,3 +19,17 @@ au_df <- data.frame(
 
 write.table(au_df, file = "03_output/au_df_example.csv",
             sep = ",", quote = FALSE, row.names = FALSE)
+
+load("02_data/ibi_30years.Rda")
+
+
+ibi_data <- data.frame(
+  date = ibi_co_30$date,
+  co = ibi_co_30$pol,
+  nox = ibi_nox_30$pol,
+  o3 = ibi_o3_30$pol,
+  pm10 = ibi_pm10_30$pol,
+  pm25 = ibi_pm25_30$pol
+)
+
+saveRDS(ibi_data, file="02_data/ibi_30_year_df.RDS")

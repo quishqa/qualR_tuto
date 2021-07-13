@@ -33,6 +33,9 @@ knitr::opts_chunk$set(echo = FALSE)
 - Existe o pacote **`readxl`** para ler os `.xls` dentro do R.
 - Eu não recomendo >:(
 - **Melhor salvar o arquivo como `.csv` e ler o `.csv` no R. :) **
+- Aproveitar para trocar nomes das columnas:
+  - tc > T (ºC)
+  - rh > Umidade relativa (%)
 - Serve para Excel, Google Sheet, Libre Office, etc
 
 ## Do Excel para o R
@@ -45,7 +48,8 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```{r , echo=TRUE}
 au <- read.csv("../03_output/au_df_example.csv",
-               sep = ",", dec = ".", header = T)
+               sep = ",", dec = ".", header = T,
+               na.strings = -9999)
 head(au, 5)
 ```
 
@@ -56,7 +60,7 @@ str(au)
 
 ## Lembre da data: `as.POSIXct()`
 - Temos que dizer para o R que a coluna `date` não é `chr` senão dado de data
-- Dica: `openair` sempre vai procurar a coluna `date`
+- **Dica: `openair` sempre vai procurar a coluna `date`**
 ```{r, echo=TRUE}
 au$date <- as.POSIXct(
   strptime(au$date, 
@@ -65,6 +69,70 @@ au$date <- as.POSIXct(
   )
 ```
 
+## Lembre da data: `as.POSIXct()`
+
+Agora sim, já podemos usar `openair`
+```{r, echo=TRUE}
+str(au)
+```
+
+## `summaryPlot()`
+```{r, echo=T,  message=F, warning=F, fig.height=3, fig.width=5}
+library(openair)
+summaryPlot(au)
+```
+
+## `summaryPlot()`
+```{r, echo=T,  message=F, warning=F, fig.height=3, fig.width=5}
+library(openair)
+au$o3 <- au$o3 * 1000
+summaryPlot(au, period="months")
+```
+
+## `TimePlot()`
+```{r, echo=T, message=F, warning=F, fig.height=3, fig.width=5}
+timePlot(au, pollutant="pm10")
+```
+
+## `TimePlot()`
+```{r, echo=T, message=F, warning=F, fig.height=3, fig.width=5}
+timePlot(au, pollutant=c("pm10", "pm25", "o3"))
+```
+
+## Um parentesis
+Melhor usar dados de São Paulo
+
+## Um parentesis
+Lendo dados de Ibirapuera 30 anos
+```{r, echo=T}
+ibi <- readRDS("../02_data/ibi_30_year_df.RDS")
+```
+
+## `summaryPlot()`
+```{r, echo=T, message=F, warning=F, fig.height=3, fig.width=5}
+summaryPlot(ibi)
+```
+
+
+## `timePlot()`
+```{r, echo=T, fig.height=3, fig.width=5}
+timePlot(ibi, pol = "o3")
+```
+
+## `timePlot()`
+```{r, echo=T, fig.height=3, fig.width=5}
+timePlot(ibi, pol = "o3", avg.time = "month")
+```
+
+## `timePlot()`
+```{r, echo=T, fig.height=3, fig.width=5}
+timePlot(ibi, pol = c("pm10", "pm25"), avg.time = "day")
+```
+
+## `timeVariation()`
+```{r, echo=T, fig.height=5, fig.width=8}
+timeVariation(ibi, pol = "o3")
+```
 
 ## Maior informação
 - [`openair` github repository](https://github.com/davidcarslaw/openair)
