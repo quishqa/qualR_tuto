@@ -148,10 +148,83 @@ ibi19 <- selectByDate(ibi, year = 2019)
 timePlot(covid, pol = "pm25")
 ```
 
+## `SelectByDate`
+```{r, echo=T}
+ibi19_weekday <- selectByDate(ibi19, day="weekday")
+ibi19_weekend <- selectByDate(ibi19, day="weekend")
+mean(ibi19_weekday$o3, na.rm = T)
+mean(ibi19_weekend$o3, na.rm = T)
+
+```
+
+## `SelectByDate`
+```{r, echo=T, eval=F}
+weekday_hour <- aggregate(ibi19_weekday["o3"],
+                          format(ibi19_weekday["date"], "%H"),
+                          mean, na.rm = TRUE)
+weekend_hour <- aggregate(ibi19_weekend["o3"], 
+                          format(ibi19_weekend["date"], "%H"),
+                          mean, na.rm = TRUE)
+
+plot(weekend_hour$date, weekend_hour$o3, t = "l", col="red",
+     ylim = c(0, 100), ylab = "O3 (ug/m3)",
+     xlab = "Hour")
+lines(weekday_hour$date, weekday_hour$o3, t = "l",
+      col = "blue")
+legend("topleft", legend=c("Weekday", "Weekend"), 
+       col=c("blue", "red"),
+       lty= c(1,1), bty="n")
+```
+
+
+## `SelectByDate`
+```{r, echo=F, fig.height=4 , fig.width=6}
+weekday_hour <- aggregate(ibi19_weekday["o3"], format(ibi19_weekday["date"], "%H"),
+                          mean, na.rm = TRUE)
+weekend_hour <- aggregate(ibi19_weekend["o3"], format(ibi19_weekend["date"], "%H"),
+                          mean, na.rm = TRUE)
+
+plot(weekend_hour$date, weekend_hour$o3, t = "l", col="red",
+     ylim = c(0, 100), ylab = "O3 (ug/m3)", xlab = "Hour")
+lines(weekday_hour$date, weekday_hour$o3, t = "l", col = "blue")
+legend("topleft", legend=c("Weekday", "Weekend"), col=c("blue", "red"),
+       lty= c(1,1), bty="n")
+```
+
+
+
 ## `WindRose`
+```{r, echo=T, eval=FALSE}
+library(qualR)
+
+params <- c("MP10", "MP2.5", "NOx", "VV", "DV")
+pin <- CetesbRetrieveParam(Sys.getenv("QUALAR_USER"),
+                           Sys.getenv("QUALAR_PASS"),
+                           params,
+                           "Pinheiros",
+                           "01/01/2020",
+                           "31/12/2020")
+
+saveRDS(pin, file="../02_data/pin_pol_with_wind.Rds")
+```
+
+## `windRose()`
+```{r, echo=T, fig.height=3, fig.width=3, warning=F}
+pin <- readRDS("../02_data/pin_pol_with_wind.Rds")
+windRose(pin, ws="ws", wd="wd")
+```
+
+## `windRose()`
+```{r, echo=T, fig.height=4, fig.width=10, warning=F}
+windRose(pin, ws="ws", wd="wd", type = "month",
+         layout = c(6, 2))
+
+```
+
 
 ## Exemplos mais legais
 - Esta presentação foi feita seguindo estes exemplos
+- [Exemplos SP](https://github.com/quishqa/qualR_tuto/blob/main/02_data/openair_exemplos_sp.html)
 
 
 
