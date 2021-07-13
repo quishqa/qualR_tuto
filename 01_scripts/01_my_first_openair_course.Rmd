@@ -2,7 +2,7 @@
 title: "Minha primeira aula do `openair`"
 author:
 - Mario Gavidia-Calderón \newline
-- Rafaella Squizzato \newline
+- Rafaela Squizzato \newline
 - Alejandro Delgado
 date: "7/12/2021"
 output:
@@ -133,6 +133,27 @@ timePlot(ibi, pol = c("pm10", "pm25"), avg.time = "day")
 ```{r, echo=T, fig.height=5, fig.width=8}
 timeVariation(ibi, pol = "o3")
 ```
+
+## `SelectByDate`
+```{r, echo=T, fig.height=3, fig.width=5}
+covid <- selectByDate(ibi,
+                      start="15/3/2020",
+                      end="28/3/2020")
+timePlot(covid, pol = "o3")
+```
+
+## `SelectByDate`
+```{r, echo=T, fig.height=3, fig.width=5}
+ibi19 <- selectByDate(ibi, year = 2019)
+timePlot(covid, pol = "pm25")
+```
+
+## `WindRose`
+
+## Exemplos mais legais
+- Esta presentação foi feita seguindo estes exemplos
+
+
 
 ## Maior informação
 - [`openair` github repository](https://github.com/davidcarslaw/openair)
