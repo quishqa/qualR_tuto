@@ -257,6 +257,14 @@ ibi19_season <- timeAverage(ibi19, avg.time = "season")
 ```
 
 
+## `splitByDate`
+```{r, echo=T, fig.height=5, fig.width=8}
+ibi_cov <- splitByDate(ibi, dates = "1/3/2020",
+                       name = "situation",
+                       labels = c("Before COVID", "After COVID"))
+timeVariation(ibi_cov, pol = "o3", group = "situation")
+
+```
 
 
 
