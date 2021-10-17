@@ -19,3 +19,8 @@ pin_20$day <- factor(pin_20$day,
 pin_20_sorted <- pin_20[order(pin_20$day), ]
 polarAnnulus(pin_20_sorted, pollutant = "mp2.5", period="hour",
              exclude.missing = F, type = "day")
+
+# Better 
+polarAnnulus(pin_20_sorted, pollutant = "mp2.5", period="hour",
+             exclude.missing = F, type = "day",
+             key.footer = "PM2.5")
